@@ -15,11 +15,18 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        poster:
+          "bg-accent text-accent-foreground hover:bg-foreground hover:text-background font-mono uppercase tracking-wider text-xs font-semibold",
+        hero:
+          "bg-foreground text-background hover:bg-highlight hover:text-highlight-foreground font-mono uppercase tracking-wider text-xs font-semibold",
+        ticket:
+          "bg-highlight text-highlight-foreground hover:bg-foreground hover:text-background font-mono uppercase tracking-wider text-xs font-semibold",
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        sm: "h-9 rounded-md px-4",
+        lg: "h-12 rounded-md px-8",
+        xl: "h-14 rounded-md px-10 text-sm",
         icon: "h-10 w-10",
       },
     },
