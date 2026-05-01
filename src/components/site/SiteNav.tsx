@@ -1,4 +1,5 @@
 import { Search, ShoppingBag, Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
@@ -14,39 +15,39 @@ export const SiteNav = () => {
   }, []);
 
   const links = [
-    { label: "Events", href: "#events" },
-    { label: "Spotlight", href: "#spotlight" },
-    { label: "Journal", href: "#journal" },
-    { label: "Contact", href: "#contact" },
+    { label: "Events", href: "/events" },
+    { label: "Halls", href: "/#halls" },
+    { label: "Spotlight", href: "/#spotlight" },
+    { label: "Visit", href: "/#contact" },
   ];
 
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/85 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
+          ? "bg-background/85 backdrop-blur-md border-b border-border text-foreground"
+          : "bg-transparent text-background"
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <a href="#" className="flex items-center gap-2 group">
-          <span className="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
-            <span className="w-2 h-2 rounded-full bg-accent" />
+        <Link to="/" className="flex items-center gap-2 group">
+          <span className="w-7 h-7 rounded-full bg-accent flex items-center justify-center">
+            <span className="w-2 h-2 rounded-full bg-foreground" />
           </span>
           <span className="font-display text-xl font-semibold tracking-tight">
             Olive<span className="text-highlight">.</span>Send
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            <a
+            <Link
               key={l.href}
-              href={l.href}
-              className="font-mono-label text-foreground/70 hover:text-foreground transition-colors"
+              to={l.href}
+              className="font-mono-label opacity-70 hover:opacity-100 transition-opacity"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -58,8 +59,8 @@ export const SiteNav = () => {
             <ShoppingBag className="w-4 h-4" />
             <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-highlight" />
           </Button>
-          <Button variant="poster" size="sm" className="hidden sm:inline-flex">
-            Get Tickets
+          <Button asChild variant="poster" size="sm" className="hidden sm:inline-flex">
+            <Link to="/events">Get Tickets</Link>
           </Button>
           <Button
             variant="ghost"
@@ -74,17 +75,17 @@ export const SiteNav = () => {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
+        <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md text-foreground">
           <nav className="container flex flex-col py-4 gap-4">
             {links.map((l) => (
-              <a
+              <Link
                 key={l.href}
-                href={l.href}
+                to={l.href}
                 onClick={() => setOpen(false)}
                 className="font-mono-label py-2"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
           </nav>
         </div>
