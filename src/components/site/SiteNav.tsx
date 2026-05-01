@@ -1,0 +1,94 @@
+import { Search, ShoppingBag, Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+
+export const SiteNav = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const links = [
+    { label: "Events", href: "#events" },
+    { label: "Spotlight", href: "#spotlight" },
+    { label: "Journal", href: "#journal" },
+    { label: "Contact", href: "#contact" },
+  ];
+
+  return (
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-background/85 backdrop-blur-md border-b border-border"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container flex items-center justify-between h-16 md:h-20">
+        <a href="#" className="flex items-center gap-2 group">
+          <span className="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
+            <span className="w-2 h-2 rounded-full bg-accent" />
+          </span>
+          <span className="font-display text-xl font-semibold tracking-tight">
+            Olive<span className="text-highlight">.</span>Send
+          </span>
+        </a>
+
+        <nav className="hidden md:flex items-center gap-8">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="font-mono-label text-foreground/70 hover:text-foreground transition-colors"
+            >
+              {l.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2 md:gap-3">
+          <Button variant="ghost" size="icon" aria-label="Search">
+            <Search className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" size="icon" aria-label="Cart" className="relative">
+            <ShoppingBag className="w-4 h-4" />
+            <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-highlight" />
+          </Button>
+          <Button variant="poster" size="sm" className="hidden sm:inline-flex">
+            Get Tickets
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setOpen((o) => !o)}
+            aria-label="Menu"
+          >
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </Button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
+          <nav className="container flex flex-col py-4 gap-4">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="font-mono-label py-2"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};
