@@ -4,13 +4,13 @@ export const Marquee = () => {
     "★",
     "Felabration 2026",
     "★",
-    "Lagos Theatre Festival",
+    "National Troupe of Nigeria",
     "★",
-    "Asa Live in Concert",
+    "Iganmu Shorts · New Cinema",
     "★",
-    "Burna Boy · Homecoming",
+    "Tiwa Savage · Lucid Dreams",
     "★",
-    "Afrobeat Underground",
+    "After Hours · Jazz at the Banquet Hall",
     "★",
   ];
   const loop = [...items, ...items];
