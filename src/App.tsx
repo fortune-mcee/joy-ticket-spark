@@ -11,6 +11,8 @@ import AdminDashboard from "./pages/admin/Dashboard.tsx";
 import AdminEvents from "./pages/admin/AdminEvents.tsx";
 import AdminEventDetail from "./pages/admin/AdminEventDetail.tsx";
 import AdminHalls from "./pages/admin/AdminHalls.tsx";
+import AdminHallDetail from "./pages/admin/AdminHallDetail.tsx";
+import AdminEventSeats from "./pages/admin/AdminEventSeats.tsx";
 import AdminCategories from "./pages/admin/AdminCategories.tsx";
 import AdminBookings from "./pages/admin/AdminBookings.tsx";
 import AdminCustomers from "./pages/admin/AdminCustomers.tsx";
@@ -31,7 +33,9 @@ const App = () => (
             <Route index element={<AdminDashboard />} />
             <Route path="events" element={<AdminEvents />} />
             <Route path="events/:id" element={<AdminEventDetail />} />
+            <Route path="events/:id/seats" element={<AdminEventSeats />} />
             <Route path="halls" element={<AdminHalls />} />
+            <Route path="halls/:hall" element={<AdminHallDetail />} />
             <Route path="categories" element={<AdminCategories />} />
             <Route path="bookings" element={<AdminBookings />} />
             <Route path="customers" element={<AdminCustomers />} />
