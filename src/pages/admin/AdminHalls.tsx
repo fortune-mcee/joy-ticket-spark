@@ -1,19 +1,16 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { HALLS, events } from "@/data/events";
+import { hallSeating, hallCapacity } from "@/data/seating";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Plus, Users } from "lucide-react";
+import { Plus, Users, Layers, ArrowUpRight } from "lucide-react";
 import { toast } from "sonner";
 
 type Hall = { name: string; capacity: number; type: string; description: string };
@@ -62,7 +59,7 @@ export default function AdminHalls() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {halls.map((h) => (
-          <Card key={h.name} className="border-border">
+          <Card key={h.name} className="border-border group hover:shadow-card transition-shadow">
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div>
@@ -74,10 +71,16 @@ export default function AdminHalls() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">{h.description}</p>
-              <div className="flex items-center gap-2 font-mono-label text-muted-foreground">
-                <Users className="h-3.5 w-3.5" />
-                Capacity {h.capacity.toLocaleString()}
+              <div className="flex flex-wrap gap-4 font-mono-label text-muted-foreground mb-4">
+                <span className="flex items-center gap-1.5"><Users className="h-3.5 w-3.5" /> {(hallSeating[h.name] ? hallCapacity(h.name) : h.capacity).toLocaleString()}</span>
+                <span className="flex items-center gap-1.5"><Layers className="h-3.5 w-3.5" /> {hallSeating[h.name]?.zones.length ?? 0} zones</span>
+                <span className="flex items-center gap-1.5">{hallSeating[h.name]?.tiers.length ?? 0} tiers</span>
               </div>
+              <Button asChild size="sm" variant="outline" className="w-full">
+                <Link to={`/admin/halls/${encodeURIComponent(h.name)}`}>
+                  Configure seating <ArrowUpRight className="h-3.5 w-3.5" />
+                </Link>
+              </Button>
             </CardContent>
           </Card>
         ))}

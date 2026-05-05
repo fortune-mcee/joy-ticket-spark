@@ -33,9 +33,14 @@ export default function AdminEventDetail() {
 
   return (
     <div className="space-y-6">
-      <Button asChild variant="ghost" size="sm" className="-ml-3">
-        <Link to="/admin/events"><ArrowLeft className="h-4 w-4" /> All events</Link>
-      </Button>
+      <div className="flex items-center justify-between">
+        <Button asChild variant="ghost" size="sm" className="-ml-3">
+          <Link to="/admin/events"><ArrowLeft className="h-4 w-4" /> All events</Link>
+        </Button>
+        <Button asChild variant="hero" size="sm">
+          <Link to={`/admin/events/${ev.id}/seats`}>Manage seats & box office</Link>
+        </Button>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
