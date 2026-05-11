@@ -18,6 +18,7 @@ export const SiteNav = () => {
     { label: "Events", href: "/events" },
     { label: "Halls", href: "/#halls" },
     { label: "Spotlight", href: "/#spotlight" },
+    { label: "My Tickets", href: "/my-tickets" },
     { label: "Visit", href: "/#contact" },
   ];
 
